@@ -1,0 +1,13 @@
+Package: RcvmWrangler
+Type: Package
+Title: Pacote que permite o download de dados publicos relativos aos fundos de investimento brasileiros
+Version: 0.1.0
+Author: Bruno M S S Melo
+Maintainer: Bruno M S S Melo <ctbrunomelo@gmail.com>
+Description: Pacote que permite o download dos informes diários, balancetes
+    e cadastros dos fundos de investimentos brasileiros por meio do webservice
+    disponibilizado pela CVM.
+Imports: RCurl, XML, stringr
+License: GPL-3
+LazyData: TRUE
+RoxygenNote: 5.0.1
