@@ -17,7 +17,7 @@
 cvmCarregaArqAnualInformes <- function(nomeArq, listaFundos = NULL) {
 
   message(paste0(paste0("Abrindo arquivo \"", nomeArq), "\" ..."))
-  dirTmp <- "./tmp"
+  dirTmp <- "./tmp_"
   unzip(zipfile = nomeArq, exdir = dirTmp)
   message("Concluido")
   message("Processando informes diarios ...")
@@ -39,21 +39,21 @@ cvmCarregaArqAnualInformes <- function(nomeArq, listaFundos = NULL) {
     try({
 
       xmlFile <- lsFiles[i]
-      xmlParsed <- xmlParse(xmlFile)
+      xmlParsed <- XML::xmlParse(xmlFile)
 
       if (is.null(listaFundos)) {
         xmlPath <- "/ROOT/INFORMES/INFORME_DIARIO"
       } else {
-        xmlPath <- paste0(paste(rep("/ROOT/INFORMES/INFORME_DIARIO[CNPJ_FDO =", length(fundos)),
-                                fundos, collapse = "] | "), "]")
+        xmlPath <- paste0(paste(rep("/ROOT/INFORMES/INFORME_DIARIO[CNPJ_FDO =", length(listaFundos)),
+                                listaFundos, collapse = "] | "), "]")
       }
 
-      xmlNodeSet <- getNodeSet(xmlParsed, xmlPath)
+      xmlNodeSet <- XML::getNodeSet(xmlParsed, xmlPath)
 
       xmlInfo <- XML::xmlSApply(xmlNodeSet, function(x) XML::xmlSApply(x, XML::xmlValue))
 
       dfInformeCorrente <- data.frame(t(xmlInfo),
-                                      keep.rownames = F,
+                                      row.names = F,
                                       stringsAsFactors = F)
 
 
@@ -68,7 +68,7 @@ cvmCarregaArqAnualInformes <- function(nomeArq, listaFundos = NULL) {
   close(pb)
 
   setwd(dirMain)
-
+  
   dfInforme$VL_TOTAL <- as.numeric(sub(",", ".", dfInforme$VL_TOTAL))
   dfInforme$VL_QUOTA <- as.numeric(sub(",", ".", dfInforme$VL_QUOTA))
   dfInforme$PATRIM_LIQ <- as.numeric(sub(",", ".", dfInforme$PATRIM_LIQ))
