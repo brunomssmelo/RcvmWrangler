@@ -53,15 +53,13 @@ cvmCarregaArqAnualInformes <- function(nomeArq, listaFundos = NULL) {
       xmlInfo <- XML::xmlSApply(xmlNodeSet, function(x) XML::xmlSApply(x, XML::xmlValue))
 
       dfInformeCorrente <- data.frame(t(xmlInfo),
-                                      row.names = F,
                                       stringsAsFactors = F)
-
-
 
       dfInforme <- rbind(
         dfInforme,
         dfInformeCorrente
       )
+
     }, silent = T)
   }
 
