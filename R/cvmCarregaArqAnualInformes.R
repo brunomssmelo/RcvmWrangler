@@ -66,13 +66,16 @@ cvmCarregaArqAnualInformes <- function(nomeArq, listaFundos = NULL) {
   close(pb)
 
   setwd(dirMain)
-  
-  dfInforme$VL_TOTAL <- as.numeric(sub(",", ".", dfInforme$VL_TOTAL))
-  dfInforme$VL_QUOTA <- as.numeric(sub(",", ".", dfInforme$VL_QUOTA))
-  dfInforme$PATRIM_LIQ <- as.numeric(sub(",", ".", dfInforme$PATRIM_LIQ))
-  dfInforme$CAPTC_DIA <- as.numeric(sub(",", ".", dfInforme$CAPTC_DIA))
-  dfInforme$RESG_DIA <- as.numeric(sub(",", ".", dfInforme$RESG_DIA))
-  dfInforme$DT_COMPTC <- as.Date(dfInforme$DT_COMPTC)
+
+  # voltar aqui
+  try({
+    dfInforme$VL_TOTAL <- as.numeric(sub(",", ".", dfInforme$VL_TOTAL))
+    dfInforme$VL_QUOTA <- as.numeric(sub(",", ".", dfInforme$VL_QUOTA))
+    dfInforme$PATRIM_LIQ <- as.numeric(sub(",", ".", dfInforme$PATRIM_LIQ))
+    dfInforme$CAPTC_DIA <- as.numeric(sub(",", ".", dfInforme$CAPTC_DIA))
+    dfInforme$RESG_DIA <- as.numeric(sub(",", ".", dfInforme$RESG_DIA))
+    dfInforme$DT_COMPTC <- as.Date(dfInforme$DT_COMPTC)
+  }, silent = T)
 
   unlink(dirTmp, recursive=TRUE)
 
