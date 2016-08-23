@@ -75,9 +75,17 @@ cvmCarregaArqAnualInformes <- function(nomeArq, listaFundos = NULL) {
     dfInforme$CAPTC_DIA <- as.numeric(sub(",", ".", dfInforme$CAPTC_DIA))
     dfInforme$RESG_DIA <- as.numeric(sub(",", ".", dfInforme$RESG_DIA))
     dfInforme$DT_COMPTC <- as.Date(dfInforme$DT_COMPTC)
+    dfInforme$NR_COTST <- as.numeric(dfInforme$NR_COTST)
   }, silent = T)
 
   unlink(dirTmp, recursive=TRUE)
+
+  dfInforme$CNPJ_FDO <- stringr::str_pad(
+    string = dfInforme$CNPJ_FDO,
+    width = 14,
+    side = "left",
+    pad = "0"
+  )
 
   message("Concluido")
 

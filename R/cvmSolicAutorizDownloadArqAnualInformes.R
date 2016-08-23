@@ -6,6 +6,9 @@
 #' @details
 #' Esta funcao solicita autorizacao pala efetuar o download dos informes diarios dos ultimos
 #' doze meses.
+#'
+#' Obs.: Aparentemente os informes relativos a alguns FII (Fundos de Investimentos Imobiliarios) nao
+#' sao enviados.
 #' @examples
 #' \dontrun{
 #' dfAutorizacao <- cvmSolicAutorizDownloadArqAnualInformes(loginInfo = dfLogin)
