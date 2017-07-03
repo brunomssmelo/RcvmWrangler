@@ -31,7 +31,7 @@ cvmSolicAutorizDownloadCadastro <- function(loginInfo, refDate){
                pattern = "(<IdSessao>) int ",
                replacement= paste0("\\1", dfLoginInfo$IdSessao))
   body <- gsub(x = body,
-               pattern = "(<strDtRefer>) int ",
+               pattern = "(<strDtRefer>) string ",
                replacement= paste0("\\1", refDate))
   body <- gsub(x = body,
                pattern = "(<strMotivoAutorizDownload>) string ",
